@@ -41,11 +41,9 @@
 #include <semaphore.h>
 #endif
 
-#ifdef __APPLE__
-#ifndef CLOCK_REALTIME
+#if __APPLE__ && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101200
 #include <mach/clock.h>
 #include <mach/mach.h>
-#endif
 namespace
 {
   template< typename TYPE >
@@ -170,7 +168,7 @@ inline int CondLock()
        {if (pthread_mutex_trylock( &cs )) return 0;
         return 1;
        }
-#ifdef __APPLE__
+#if __APPLE__ && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101200
 inline int TimedLock( int wait_ms )
 {
   struct timespec wait, cur, dur;
