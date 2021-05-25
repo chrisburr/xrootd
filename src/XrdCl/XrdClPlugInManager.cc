@@ -21,7 +21,6 @@
 // granted to it by virtue of its status as an Intergovernmental Organization
 // or submit itself to any jurisdiction.
 //------------------------------------------------------------------------------
-
 #include "XrdCl/XrdClPlugInManager.hh"
 #include "XrdCl/XrdClDefaultEnv.hh"
 #include "XrdCl/XrdClLog.hh"
@@ -228,7 +227,7 @@ namespace XrdCl
 
       XrdSysPwd pwdHandler;
       passwd *pwd = pwdHandler.Get( getuid() );
-      if( !pwd )
+      if( pwd )
       {
         std::string userPlugIns = pwd->pw_dir;
         userPlugIns += "/.xrootd/client.plugins.d";
